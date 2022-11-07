@@ -17,11 +17,11 @@ const Auth = () => {
       password,
     };
 
-    const url = "https://socialmtn.devmountain.com";
-    url = "http://localhost:4545";
+    //const url = "https://socialmtn.devmountain.com";
+    const url = "http://localhost:4545";
 
     axios
-      .post(register ? "${url}/register" : "${url}/login", body)
+      .post(register ? `${url}/register` : `${url}/login`, body)
       .then((res) => {
         console.log("AFTER AUTH", res.data);
         authCtx.login("token", "exp", "userId");
@@ -55,7 +55,7 @@ const Auth = () => {
         />
         <button className="form-btn">{register ? "Sign Up" : "Login"}</button>
       </form>
-      <button className="form-btn">
+      <button className="form-btn" onClick={() => setRegister(!register)}>
         Need to {register ? "Login" : "Sign Up"}?
       </button>
     </main>

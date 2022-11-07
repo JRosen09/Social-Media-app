@@ -13,7 +13,7 @@ module.exports = {
       console.log("ERROR IN auth middleware");
       res.sendStatus(401);
     }
-
+    //creating a variable to hold verified token
     let token;
 
     try {

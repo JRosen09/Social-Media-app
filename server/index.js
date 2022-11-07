@@ -1,7 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { PORT } = process.env;
+
+const { sequelize } = require("./util/database");
+const { User } = require("./models/user");
+const { Post } = require("./models/post");
+const { SERVER_PORT } = process.env;
 const {
   getAllPosts,
   getCurrentUserPosts,
@@ -14,6 +18,9 @@ const { isAuthenticated } = require("./middleware/isAuthenticated");
 
 const app = express();
 
+User.hasMany(Post);
+Post.belongsTo(User);
+
 app.use(express.json());
 app.use(cors());
 
@@ -22,11 +29,18 @@ app.post("/register", register);
 app.post("/login", login);
 
 //GET POST
+app.get("/posts", getAllPosts);
 app.get("/userposts/:userId", getCurrentUserPosts);
 app.post("/posts", isAuthenticated, addPost);
 app.put("/posts/:id", isAuthenticated, editPost);
 app.delete("/posts/:id", isAuthenticated, deletePost);
 
-app.listeners(PORT, () =>
-  console.log("database is up & server running on ${PORT}")
-);
+sequelize
+  .sync({ force: true })
+  //sequelize.sync()
+  .then(() => {
+    app.listen(SERVER_PORT, () =>
+      console.log(`database is up & server is running on ${SERVER_PORT}`)
+    );
+  })
+  .catch((err) => console.log(err));
