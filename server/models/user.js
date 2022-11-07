@@ -1,12 +1,12 @@
 const { DataTypes } = require("sequelize");
+
 const { sequelize } = require("../util/database");
 
-//making the database table
 module.exports = {
   User: sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrememt: true,
+      autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },

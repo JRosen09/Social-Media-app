@@ -5,10 +5,11 @@ module.exports = {
   addPost: async (req, res) => {
     try {
       const { title, content, status, userId } = req.body;
+      console.log(title, content, status, userId);
       await Post.create({ title, content, privateStatus: status, userId });
       res.sendStatus(200);
     } catch (error) {
-      console.log("ERROR IN getCurrentUserPosts");
+      console.log("ERROR IN addPosts");
       console.log(error);
       res.sendStatus(400);
     }

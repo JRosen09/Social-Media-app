@@ -21,6 +21,7 @@ const calculateRemainingTime = (exp) => {
 const getLocalData = () => {
   const storedToken = localStorage.getItem("token");
   const storedExp = localStorage.getItem("exp");
+  const storeduserId = localStorage.getItem("userId");
 
   const remainingTime = calculateRemainingTime(storedExp);
 
@@ -33,6 +34,7 @@ const getLocalData = () => {
   return {
     token: storedToken,
     duration: remainingTime,
+    userId: storeduserId,
   };
 };
 

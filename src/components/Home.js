@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("/posts")
+      .get("http://localhost:4545/posts")
       .then((res) => {
         if (userId) {
           const otherUsersPosts = res.data.filter(

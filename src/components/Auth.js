@@ -24,7 +24,7 @@ const Auth = () => {
       .post(register ? `${url}/register` : `${url}/login`, body)
       .then((res) => {
         console.log("AFTER AUTH", res.data);
-        authCtx.login("token", "exp", "userId");
+        authCtx.login(res.data.token, res.data.exp, res.data.userId);
       })
       //catch error
       .catch((err) => {
